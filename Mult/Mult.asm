@@ -1,67 +1,57 @@
-// This file is based on part of www.nand2tetris.org
-// and the book "The Elements of Computing Systems"
-// by Nisan and Schocken, MIT Press.
-// File name: Mult.asm
-
-// Multiplies R1 and R2 and stores the result in R0.
-// (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
-
-// Put your code here.
 @R0
 M=0
+
 @R1
 D=M
 @END
 D;JEQ
+
 @R2
 D=M
 @END
 D;JEQ
+
 @R1
 D=M
-@NEGATIVE1
+@R1_NEGATIVE
 D;JLT
+
 @R2
 D=M
-@NEGATIVE2
+@R2_NEGATIVE  
 D;JLT
-@POSITIVE
+
+@POSITIVE_LOOP
 0;JMP
 
-(NEGATIVE1)
+(R1_NEGATIVE)
+@R1
+M=-M
 @R2
 D=M
-@BOTHNEGATIVE
+@BOTH_NEGATIVE
 D;JLT
-@R1
-M=-M
-@POSITIVE
+@RESULT_NEGATIVE
+M=1
+@POSITIVE_LOOP
 0;JMP
 
-(NEGATIVE2)
+(R2_NEGATIVE)
 @R2
 M=-M
-@POSITIVE
+@RESULT_NEGATIVE
+M=1
+@POSITIVE_LOOP
 0;JMP
 
-(BOTHNEGATIVE)
-@R1
-M=-M
+(BOTH_NEGATIVE)
 @R2
 M=-M
 
-(POSITIVE)
+(POSITIVE_LOOP)
 @R1
 D=M
-@R2
-D=D-M
-@SWAP
-D;JGT
-
-(LOOP)
-@R1
-D=M
-@NEGATE
+@FINISH
 D;JEQ
 @R2
 D=M
@@ -69,36 +59,17 @@ D=M
 M=D+M
 @R1
 M=M-1
-@LOOP
+@POSITIVE_LOOP
 0;JMP
 
-(SWAP)
-@R1
+(FINISH)
+@RESULT_NEGATIVE
 D=M
-@temp
-M=D
-@R2
-D=M
-@R1
-M=D
-@temp
-D=M
-@R2
-M=D
-@LOOP
-0;JMP
-
-(NEGATE)
-@R1
-D=M
-@R2
-D=M+D
-@END2
+@END
 D;JEQ
 @R0
 M=-M
 
-(END2)
 (END)
 @END
 0;JMP
