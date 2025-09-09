@@ -1,8 +1,26 @@
+@val1
+M=0
+@val2
+M=0
+@outer_count
+M=0
+@inner_count
+M=0
+@ptr
+M=0
+
+@R2
+D=M
+@1
+D=D-A
+@SET_R0
+D;JLT
+
 @R2
 D=M
 @2
 D=D-A
-@COMPLETE
+@SET_R0
 D;JLT
 
 @R2
@@ -16,12 +34,10 @@ M=D
 @outer_count
 D=M
 @COMPLETE
-D;JEQ
+D;JLT
 
-@0
-D=A
 @inner_count
-M=D
+M=0
 
 @R1
 D=M
@@ -44,7 +60,6 @@ M=D
 
 @ptr
 A=M
-@1
 A=A+1
 D=M
 @val2
@@ -67,7 +82,6 @@ M=D
 D=M
 @ptr
 A=M
-@1
 A=A+1
 M=D
 
@@ -85,9 +99,13 @@ M=M-1
 @OUTER
 0;JMP
 
-(COMPLETE)
+(SET_R0)
 @R0
 M=-1
+@COMPLETE
+0;JMP
+
+(COMPLETE)
 @END
 0;JMP
 
