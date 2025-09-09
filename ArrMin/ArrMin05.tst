@@ -1,6 +1,6 @@
-load ArrSort.asm,
-output-file ArrSort02.out,
-compare-to ArrSort02.cmp,
+load ArrMin.asm,
+output-file ArrMin05.out,
+compare-to ArrMin05.cmp,
 output-list RAM[0..25] %D1.6.1;
 
 set RAM[1] 20,
