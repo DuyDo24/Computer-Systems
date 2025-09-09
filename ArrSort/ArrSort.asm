@@ -2,20 +2,19 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 // Put your code here.
-@R2
-D=M
-@LEN
-M=D
-
 @R1
 D=M
 @BASE
 M=D
 
+@R2
+D=M
+@LEN
+M=D
+
 @R0
 M=-1
 
-(OUTER)
 @LEN
 D=M
 @END
@@ -26,59 +25,67 @@ D=M
 @I
 M=D
 
+(OUTER)
 @LEN
 D=M
+@ENDLOOP
+D;JEQ
+
+@I
+D=M
 @J
+M=D
+
+@LEN
+D=M
+@OUTERLEN
 M=D
 
 (INNER)
 @J
 D=M
-@I
+@OUTERLEN
 D=D-M
 @SKIP
 D;JEQ
 
-@I
+@J
 D=M
 A=D
 D=M
 @J
-A=M
+A=M+1
 D=D-M
-@NO_SWAP
+@NOSWAP
 D;JLE
 
-@I
+@J
 A=M
 D=M
 @J
-A=M
+A=M+1
 D=D-M
-@I
-A=M
-M=D
-@J
-A=M
-D=M
 @J
 A=M
 M=D
-(NO_SWAP)
+@J
+A=M+1
+M=D
+(NOSWAP)
 
 @J
-M=M-1
+M=M+1
 @INNER
 0;JMP
 
-@LEN
+@OUTERLEN
 M=M-1
 @OUTER
 0;JMP
 
-(END)
+(ENDLOOP)
 @R0
 M=-1
-(ENDLOOP)
-@ENDLOOP
+(END)
+@END
 0;JMP
