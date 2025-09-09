@@ -1,4 +1,8 @@
 @R2
+D=M
+@END
+D;JLE
+@R2
 D=M-1
 @R3
 M=D
@@ -13,7 +17,7 @@ M=0
 @R4
 D=M
 @R3
-D=D-M
+D=D-M-1
 @NEXT_PASS
 D;JGE
 @R1
@@ -63,4 +67,3 @@ M=-1
 (HALT)
 @HALT
 0;JMP
-
