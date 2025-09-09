@@ -1,89 +1,91 @@
 @R2
 D=M
-@1
+@2
 D=D-A
-@SORT_COMPLETE
-D;JLE
+@COMPLETE
+D;JLT
 
 @R2
 D=M
 @1
 D=D-A
-@outer_passes
+@outer_count
 M=D
 
-(OUTER_LOOP)
-@outer_passes
+(OUTER)
+@outer_count
 D=M
-@SORT_COMPLETE
+@COMPLETE
 D;JEQ
 
-@outer_passes
-D=M
+@0
+D=A
 @inner_count
 M=D
 
 @R1
 D=M
-@array_ptr
+@ptr
 M=D
 
-(INNER_LOOP)
+(INNER)
 @inner_count
 D=M
-@END_INNER
-D;JEQ
+@outer_count
+D=D-M
+@OUTER_NEXT
+D;JGE
 
-@array_ptr
+@ptr
 A=M
 D=M
-@temp1
+@val1
 M=D
 
-@array_ptr
+@ptr
 A=M
 @1
 A=A+1
 D=M
-@temp2
+@val2
 M=D
 
-@temp1
+@val1
 D=M
-@temp2
+@val2
 D=D-M
 @NO_SWAP
 D;JLE
 
-@temp2
+@val2
 D=M
-@array_ptr
+@ptr
 A=M
 M=D
 
-@temp1
+@val1
 D=M
-@array_ptr
+@ptr
 A=M
 @1
 A=A+1
 M=D
 
 (NO_SWAP)
-@array_ptr
+@ptr
 M=M+1
 @inner_count
-M=M-1
-@INNER_LOOP
+M=M+1
+@INNER
 0;JMP
 
-(END_INNER)
-@outer_passes
+(OUTER_NEXT)
+@outer_count
 M=M-1
-@OUTER_LOOP
+@OUTER
 0;JMP
 
-(SORT_COMPLETE)
+(COMPLETE)
 @R0
 M=-1
 @END

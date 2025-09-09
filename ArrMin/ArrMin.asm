@@ -13,6 +13,9 @@ M=D
 D=M
 @1
 D=D-A
+@END
+D;JEQ
+
 @counter
 M=D
 
@@ -20,7 +23,7 @@ M=D
 D=M
 @1
 D=D+A
-@current_addr
+@ptr
 M=D
 
 (LOOP)
@@ -29,26 +32,26 @@ D=M
 @END
 D;JEQ
 
-@current_addr
+@ptr
 A=M
 D=M
 @R0
 D=D-M
-@UPDATE_MIN
+@UPDATE
 D;JLT
 
-@CONTINUE
+@NEXT
 0;JMP
 
-(UPDATE_MIN)
-@current_addr
+(UPDATE)
+@ptr
 A=M
 D=M
 @R0
 M=D
 
-(CONTINUE)
-@current_addr
+(NEXT)
+@ptr
 M=M+1
 @counter
 M=M-1
