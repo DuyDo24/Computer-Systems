@@ -1,9 +1,4 @@
-// Calculates x = (a + b) - x
-// a & b are local variables
-// x is a static variable
-
-// Put your code here.
-function AddSub.main 2
+function AddSub.main 0
 push local 0
 push local 1
 add
@@ -12,7 +7,3 @@ sub
 pop static 0
 push constant 0
 return
-
-
-label END
-goto END
