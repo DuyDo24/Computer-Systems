@@ -1,5 +1,4 @@
-// Test file for AddSub.vm (Test Case 2)
-
+// Test case 1: Regular values
 load AddSub.vm,
 output-file AddSub02.out,
 compare-to AddSub02.cmp,
@@ -14,13 +13,13 @@ set argument 400,
 set this 3000,
 set that 3010,
 
-set RAM[16] 12,
+set RAM[16] 8,    
 set RAM[17] 2,
 set RAM[18] 3,
 
-set local[0] 4,
-set local[1] 6,
-set local[2] 30,
+set local[0] 2,  // a = 12
+set local[1] 3,   // b = 8
+set local[2] 0,   // unused in this test
 
 set argument[0] 100,
 set argument[1] 200,

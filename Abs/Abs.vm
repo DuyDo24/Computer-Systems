@@ -2,8 +2,32 @@
 // x & y are static variables
 
 // Put your code here.
+// Compute y = |x|
+// x is in static 0
+// y will go to static 1
 
+// Compute y = |x| where x is static 0, y is static 1
 
+push static 0
+push constant 0
+lt
+if-goto NEGATE
+
+// x >= 0
+push static 0
+goto RES
+
+label NEGATE
+push static 0
+neg
+
+label RES
+pop static 1
 
 label END
 goto END
+
+
+
+
+

@@ -4,7 +4,105 @@
 
 // Put your code here.
 
+// Load x and y
+push static 0     // push x
+push static 1     // push y
 
+// Store them in temp 0 and temp 1
+pop temp 0        // temp 0 = x
+pop temp 1        // temp 1 = y
+
+// Initialize sign = 0 (false)
+push constant 0
+pop temp 2        // temp 2 = sign
+
+// Check if x < 0
+push temp 0
+push constant 0
+lt
+if-goto X_NEG
+goto CHECK_Y
+
+label X_NEG
+// sign = !sign
+push temp 2
+not
+pop temp 2
+// x = -x
+push temp 0
+neg
+pop temp 0
+
+label CHECK_Y
+// Check if y < 0
+push temp 1
+push constant 0
+lt
+if-goto Y_NEG
+goto SWAP_IF_NEEDED
+
+label Y_NEG
+// sign = !sign
+push temp 2
+not
+pop temp 2
+// y = -y
+push temp 1
+neg
+pop temp 1
+
+label SWAP_IF_NEEDED
+// if x < y, swap temp 0 and temp 1
+push temp 0
+push temp 1
+lt
+if-goto DO_SWAP
+goto LOOP_START
+
+label DO_SWAP
+push temp 0
+pop temp 3        // temp 3 = x
+push temp 1
+pop temp 0        // x = y
+push temp 3
+pop temp 1        // y = x
+
+label LOOP_START
+// R0 = 0
+push constant 0
+pop local 0
+
+// Use temp 1 as loop counter
+label LOOP
+push temp 1
+push constant 0
+eq
+if-goto END_LOOP
+
+// local 0 += temp 0
+push local 0
+push temp 0
+add
+pop local 0
+
+// temp 1 -= 1
+push temp 1
+push constant 1
+sub
+pop temp 1
+
+goto LOOP
+
+label END_LOOP
+// If sign is true, negate result
+push temp 2
+if-goto NEGATE_RESULT
+goto END
+
+label NEGATE_RESULT
+push local 0
+neg
+pop local 0
 
 label END
 goto END
